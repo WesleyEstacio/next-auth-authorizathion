@@ -1,12 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import { signIn, signOut, useSession } from 'next-auth/react';
-import { usePathname } from 'next/navigation';
-
-const ACTIVE_ROUTE = 'py-1 px-2 text-gray-300 bg-gray-700';
-const INACTIVE_ROUTE =
-  'py-1 px-2 text-gray-500 hover:text-gray-300 hover:bg-gray-700';
+import Image from 'next/image';
 
 function AuthButton() {
   const { data: session } = useSession();
@@ -14,7 +9,16 @@ function AuthButton() {
   if (session) {
     return (
       <>
-        {session.user?.name} <br />
+        <div className="flex items-center gap-2">
+          <Image
+            src={session.user?.image || ''}
+            alt=""
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+          <span>{session.user?.name}</span>
+        </div>
         <button onClick={() => signOut()}>Sign Out</button>
       </>
     );
@@ -22,37 +26,16 @@ function AuthButton() {
 
   return (
     <>
-      Not signed in <br />
+      <span>Not signed in</span>
       <button onClick={() => signIn()}>Sign In</button>
     </>
   );
 }
 
 export function NavMenu() {
-  const pathname = usePathname();
-
   return (
-    <div>
+    <header className="bg-slate-900 w-full rounded-br-md rounded-bl-md p-4 text-white flex justify-between items-center">
       <AuthButton />
-
-      <hr className="my-4" />
-      <ul>
-        <Link href={'/'}>
-          <li className={pathname === '/' ? ACTIVE_ROUTE : INACTIVE_ROUTE}>
-            Home
-          </li>
-        </Link>
-
-        <Link href={'/protected'}>
-          <li
-            className={
-              pathname === '/protected' ? ACTIVE_ROUTE : INACTIVE_ROUTE
-            }
-          >
-            Protected
-          </li>
-        </Link>
-      </ul>
-    </div>
+    </header>
   );
 }
