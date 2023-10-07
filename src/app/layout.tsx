@@ -3,9 +3,9 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { getServerSession } from 'next-auth';
 
-import SessionProvider from './components/SessionProvider';
-import { NavMenu } from './components/NavMenu';
-import { Footer } from './components/Footer';
+import SessionProvider from '../components/SessionProvider';
+import { NavMenu } from '../components/NavMenu';
+import { Footer } from '../components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
