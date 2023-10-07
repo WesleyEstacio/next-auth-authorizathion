@@ -27,7 +27,9 @@ export default async function RootLayout({
         <SessionProvider session={session}>
           <main className="mx-auto max-w-5xl flex flex-col h-screen">
             <NavMenu />
-            <div className="flex-1 px-4">{children}</div>
+            <div className="flex-1 px-4 flex items-center justify-center">
+              {session ? children : 'Not signed in'}
+            </div>
             <Footer />
           </main>
         </SessionProvider>

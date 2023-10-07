@@ -1,6 +1,15 @@
-import { getServerSession } from 'next-auth';
+import Image from 'next/image';
+
+import Authenticated from '@/assets/Authenticated.svg';
 
 export default async function Home() {
-  const session = await getServerSession();
-  return <>Home</>;
+  return (
+    <div className="text-center">
+      <Image
+        src={Authenticated}
+        alt=""
+      />
+      <p className="text-green-600">Successful Authenticated</p>
+    </div>
+  );
 }
